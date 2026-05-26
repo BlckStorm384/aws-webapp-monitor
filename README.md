@@ -22,12 +22,39 @@ A production-grade AWS monitoring system that hosts a web application on EC2 and
 - Auto Scaling Group with Min:1, Desired:1, Max:2
 - SNS email notifications triggered on alarm
 
+## Screenshots
+
+### Web Server Live
+![Web Server](screenshots/web-server-live.png)
+
+### EC2 Instance Running
+![EC2](screenshots/ec2-running.png)
+
+### CloudWatch Alarms
+![Alarms](screenshots/cloudwatch-alarms.png)
+
+### CPU Spike Graph (98.9% during stress test)
+![CPU Spike](screenshots/cpu-spike.png)
+
+### Auto Scaling Group
+![AutoScaling](screenshots/autoscaling-group.png)
+
+### S3 Bucket for Logs
+![S3](screenshots/s3-bucket.png)
+
+### SNS Test Alert Email Received
+![Test Alert Email](screenshots/email-test-alert.png)
+
+### HighCPU Alert Email Received
+![CPU Alert Email](screenshots/email-cpu-alert.png)
+
 ## Project Structure
 
 - README.md
 - scripts/userdata.sh
 - scripts/cloudwatch-agent-config.json
 - architecture/architecture-notes.md
+- screenshots/
 
 ## Setup Steps
 
@@ -71,10 +98,11 @@ A production-grade AWS monitoring system that hosts a web application on EC2 and
 
 ## Tests Performed
 
-- Web server live and accessible via public IP
-- SNS email alert received successfully
-- Auto Scaling launched new instance automatically when EC2 stopped
-- CPU stress test triggered CloudWatch alarm at 98.9%
+- ✅ Web server live and accessible via public IP
+- ✅ SNS test alert email received successfully
+- ✅ Auto Scaling launched new instance automatically when EC2 stopped
+- ✅ CPU stress test reached 99.26% triggering HighCPU alarm
+- ✅ CloudWatch alarm email received with full details
 
 ## How Auto Recovery Works
 
@@ -91,7 +119,7 @@ A production-grade AWS monitoring system that hosts a web application on EC2 and
 2. Collects CPU, memory and disk metrics every 5 minutes
 3. Sends metrics to CloudWatch namespace MyWebApp
 4. CloudWatch Alarms evaluate metrics against thresholds
-5. When threshold breached, alarm triggers SNS notification
+5. When threshold breached alarm triggers SNS notification
 6. SNS sends email alert to subscribed email address
 
 ## Author
